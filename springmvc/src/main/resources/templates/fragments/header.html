@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="navbar navbar-dark bg-dark" th:fragment="header">
+            <span class="navbar-brand mb-0 h1">Copacabana Market</span>
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{/product/product}" href="#" class="btn btn-primary">Add product</a>
+        </nav>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Каталог</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="css/CommonMarkup.css" type = "text/css" rel="stylesheet">
+    <link href="css/Catalog.css" type = "text/css" rel="st</head>
+<body>
+    <div class="container mt-15 mb-15">
+        <div th:replace="~{fragments/header::header}">Header</div>
+
+        <p>
+        <form th:action="@{/product}" method="get">
+            <label class="lbl" th:for="Category">Категория:</label>
+            <select th:name="category" th:id="category">
+                <option value="" label="ALL"></option>
+                <option th:each="c : ${categories}" th:value="${c.title}" th:label="${c.title}"></option>
+            </select>
+            <label class="lbl" th:for="minprice">Мин.цена:</label>
+            <input type="text" th:name="minprice" th:id="minprice">
+            <label class="lbl" th:for="maxprice">Макс.цена:</label>
+            <input type="text" th:name="maxprice" th:id="maxprice">
+            <label class="lbl" th:for="title">Название:</label>
+            <input type="text" th:name="title" th:id="title">
+            <button type="submit">Найти</button>
+        </form>
+        </p>
+
+
+        <h1>Products catalog</h1>
+
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div th:each="product : ${products}" class="card" style="width: 18rem;">
+                <div th:text="${product.category.title}" class="card-header">Category</div>
+                <img th:src="@{${product.imagePath}}" class="card-img-top" alt="product image">
+                <div class="card-body">
+                    <h5 th:text="${product.title}" class="card-title">Product title</h5>
+                    <p th:text="'Цена: ' + ${product.cost}" class="card-text">Cost</p>
+                    <div class="justify-content">
+                        <a th:href="@{/product/product(id=${product.id})}" href="#" class="btn btn-primary">Edit</a>
+                        <a th:href="@{/product/remove(id=${product.id})}" href="#" class="btn btn-danger">Remove</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="~{fragments/footer::footer}">
+            Footer
+        </div>
+    </div>
+
+</body>
+</html>

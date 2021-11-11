@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Пользователи</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="css/CommonMarkup.css" type = "text/css" rel="stylesheet">
+  <link href="css/user/list.css" type = "text/css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-15 mb-15">
+  <div th:replace="~{fragments/header::header}">Header</div>
+
+  <h2>Users</h2>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Login</th>
+      <th>Roles</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+      <td th:text="${user.username}">User login</td>
+      <td>
+        <ul>
+          <li th:each="role : ${user.roles}" th:text="${role.name}">
+            User role
+          </li>
+        </ul>
+      </td>
+      <td>
+        <a th:href="@{/user/form(id=${user.id})}" href="#" class="btn btn-primary">Edit</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div th:replace="~{fragments/footer::footer}">
+    Footer
+  </div>
+</div>
+
+</body>
+</html>

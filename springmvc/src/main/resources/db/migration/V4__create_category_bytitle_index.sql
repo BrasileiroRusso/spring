@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX category_title ON category (title)
